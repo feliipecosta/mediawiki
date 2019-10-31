@@ -1,6 +1,0 @@
-[mediawiki]
-54.152.132.146 ansible_user=ubuntu
-
-
-[prometheus]
-54.162.245.143 ansible_user=ubuntu
