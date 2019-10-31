@@ -20,6 +20,26 @@
     - golang
 
 
+- name: Enable Apache
+  systemd:
+    name: apache2
+    state: started
+    enabled: true
+
+
+- name: Verifica apache
+  wait_for:
+    port: 80
+    delay: 10
+
+
+- name: Enable Mariadb
+  systemd:
+    name: mariadb
+    state: started
+    enabled: true
+
+
 - name: Download do MediaWiki
   get_url:
     url: https://releases.wikimedia.org/mediawiki/1.33/mediawiki-1.33.0.tar.gz
@@ -115,18 +135,7 @@
 #   command: mysql -u root wikidb < /etc/wikidb.sql
 
 
-- name: Verifica Apache & Enable Apache
-  systemd:
-    name: apache2
-    state: started
-    enabled: true
 
-
-- name: Verifica Mariadb & Enable Mariadb
-  systemd:
-    name: mariadb
-    state: started
-    enabled: true
 
 
 
