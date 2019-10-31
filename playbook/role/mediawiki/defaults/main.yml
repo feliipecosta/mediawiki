@@ -1,0 +1,32 @@
+wiki:
+  #define local de instalação do MediaWiki
+  install_path: /var/www/html/wiki
+  #configurações do mediawiki
+  user: wiki
+  password: aaaaaaaaaa
+  site_name: wiki
+  meta_namespace: Wiki
+  base_url: http://54.165.86.245
+  logo:
+    path: images/logo.jpg
+    source_file: none
+    copy_custom_file: false
+  emergency_contact: apache@54.165.86.245
+  password_sender: apache@54.165.86.245
+  secret_key: 'e264a8fa52677fcd3e9cf41b08ec942ad4f0e2c45cb7651a6cfcc5efb71f2ce4'
+  upgrade_key: '942a1ccd3283967d'
+  
+  #configurações do mariadb  
+  db:
+    type: mysql
+    server: localhost
+    name: wikidb
+    user: dbuser
+    password: userpass
+    prefix: ""
+    table_options: "ENGINE=InnoDB, DEFAULT CHARSET=binary"
+
+  permissions:
+    groups:
+      - { group: "*", permission: "createaccount", allowed: "false" }   
+    

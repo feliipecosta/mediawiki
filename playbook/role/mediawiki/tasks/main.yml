@@ -1,0 +1,133 @@
+- name: Instalar a lista de pacotes
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+    - git
+    - apache2
+    - mariadb-server
+    - php-xml
+    - php-mbstring
+    - php-intl
+    - php
+    - php-pear
+    - php-mysql
+    - php-gd
+    - python3-pymysql
+    - wget
+    - golang
+
+
+- name: Download do MediaWiki
+  get_url:
+    url: https://releases.wikimedia.org/mediawiki/1.33/mediawiki-1.33.0.tar.gz
+    dest: /tmp/mediawiki.tgz
+
+
+- name: Descompacta o pacote
+  unarchive:
+    src: /tmp/mediawiki.tgz
+    dest: /tmp
+    remote_src: yes
+
+
+- name: Update php.ini
+  template:
+    src: php.ini.j2
+    dest: /etc/php/7.2/apache2/php.ini  
+
+
+- name: Mover o MediaWiki para o diretório web
+  command: creates={{ wiki.install_path }} mv /tmp/mediawiki-1.33.0/ {{ wiki.install_path }}
+
+
+- name: Adiciona VHost
+  template:
+    src: mediawiki.conf.j2
+    dest: /etc/apache2/sites-available/mediawiki.conf
+
+
+- name:  Desabilita VHost padão
+  command: a2dissite 000-default.conf 
+  become: true
+
+
+- name: Habilita VHost mediawiki.conf
+  command: a2ensite mediawiki.conf
+  become: true
+
+
+- name: restart apache para aplicar a configuração do VHost
+  become: true
+  systemd:
+    name: apache2
+    state: restarted
+    daemon_reload: yes
+
+
+# - name: Configurar MediaWiki
+#   template:
+#     src: LocalSettings.php.j2
+#     dest: "{{ wiki.install_path }}/LocalSettings.php"
+    
+
+# - name: Executa script de checagem instalação 1
+#   command: php /var/www/html/wiki/maintenance/install.php --dbname=wikidb --dbserver="localhost" --installdbuser=dbuser --installdbpass=userpass --dbuser=dbuser --dbpass=userpass --server="{{wiki.base_url}}" --scriptpath=/ --lang=en --pass=aaaaaaaa "Wiki" "Admin"
+
+# - name: Executa script de checagem instalação 2
+#   command: >
+#     php {{ wiki.install_path }}/maintenance/install.php \
+#       --dbuser {{ wiki.db.user }} --dbpass {{ wiki.db.password }} \
+#       --dbname {{ wiki.db.name }} --dbserver localhost --dbtype {{ wiki.db.type }} --dbprefix "" \
+#       --email {{ wiki.emergency_contact }} \
+#       --installdbuser {{ wiki.db.user }} --installdbpass {{ wiki.db.password }} \
+#       --server http://{{ wiki.base_url }} --pass {{ wiki.password }} \
+#       {{ wiki.user }}
+#     chdir={{ wiki.install_path }}
+
+
+- name: Cria database no Mariadb
+  mysql_db:
+    name: wikidb
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  
+
+- name: Cria usuário no Mariadb
+  mysql_user:
+    name: dbuser
+    password: 'userpass'
+    priv: 'wikidb.*:ALL,GRANT'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+
+# - name: Copia dump da base wikidb ...
+#   copy: 
+#     src: /home/felipe/felipe/estudos/ansible/mediawiki/wikidb.sql 
+#     dest: /etc/wikidb.sql
+
+
+# - name: Popula a tabela wikidb com o dump ...
+#   become: true
+#   command: mysql -u root wikidb < /etc/wikidb.sql
+
+
+- name: Verifica Apache & Enable Apache
+  systemd:
+    name: apache2
+    state: started
+    enabled: true
+
+
+- name: Verifica Mariadb & Enable Mariadb
+  systemd:
+    name: mariadb
+    state: started
+    enabled: true
+
+
+
+
