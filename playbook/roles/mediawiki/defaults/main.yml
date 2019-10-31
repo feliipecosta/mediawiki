@@ -6,13 +6,13 @@ wiki:
   password: aaaaaaaaaa
   site_name: wiki
   meta_namespace: Wiki
-  base_url: http://54.165.86.245
+  base_url: http://xxx.xxx.xxx.xxx
   logo:
     path: images/logo.jpg
     source_file: none
     copy_custom_file: false
-  emergency_contact: apache@54.165.86.245
-  password_sender: apache@54.165.86.245
+  emergency_contact: apache@xxx.xxx.xxx.xxx
+  password_sender: apache@xxx.xxx.xxx.xxx
   secret_key: 'e264a8fa52677fcd3e9cf41b08ec942ad4f0e2c45cb7651a6cfcc5efb71f2ce4'
   upgrade_key: '942a1ccd3283967d'
   
