@@ -1,5 +1,6 @@
 #!/bin/bash
 cd ./terraform
+terraform init
 terraform apply -input=false -auto-approve
 sleep 20
 cd ..
