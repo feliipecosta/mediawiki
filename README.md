@@ -1,25 +1,27 @@
 # MediaWiki
 
-Sobe uma instância na AWS e configura o mediawiki e o exporter apache e node do prometheus(54.162.245.143)
+Deploy AWS instance and configure Mediawiki
 
-### Provisionamento do Ambiente
+### Provisioning Environment
 
-1 - Altere o arquivo "credentials" com as credênciais do usuário criado no IAM da AWS
+1 - Change "credentials" files with AWS user credentials.
 
-2 - Execute o arquivo "deploy.sh"
+com as credênciais do usuário criado no IAM da AWS
+
+2 - Execute "deploy.sh"
 
 ```sh
 $ ./deploy.sh
 ```
 
-3 - Acesse o IP Público ou DNS Público pelo navegador.  
+3 - Access public IP or public DNS in your browser.  
 
 
-### Dependências
+### Dependencies
 
-Dependências instaladas no ambiente.
+Installed dependencies in environment.
 
-| Package | Documentação |
+| Packages | Docs |
 | ------ | ------ |
 | apache2 | http://httpd.apache.org/docs/ |
 | mariadb-server | https://mariadb.com/kb/pt/documentation/ |

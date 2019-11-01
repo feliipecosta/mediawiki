@@ -2,13 +2,6 @@
   - mediawiki
   roles:
     - mediawiki
-    - monitor
-
-
-- hosts:
-    - prometheus
-  roles:
-    - prometheus
 
   #permite executar todos os hosts para que a play seja executada o mais rápido possível  
   strategy: free 
