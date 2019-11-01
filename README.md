@@ -5,6 +5,7 @@ Sobe uma instância na AWS e configura o mediawiki e o exporter apache e node do
 ### Provisionamento do Ambiente
 
 1 - Altere o arquivo "credentials" com as credênciais do usuário criado no IAM da AWS
+
 2 - Execute o arquivo "deploy.sh"
 
 ```sh
