@@ -1,5 +1,7 @@
 # MediaWiki
 
+[![Build Status](https://travis-ci.org/feliipecosta/mediawiki.svg?branch=master)](https://travis-ci.org/feliipecosta/mediawiki)
+
 Deploy AWS instance and configure Mediawiki
 
 ### Provisioning Environment
