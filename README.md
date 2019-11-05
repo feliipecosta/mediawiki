@@ -27,7 +27,6 @@ Installed dependencies in environment.
 | mariadb-server | https://mariadb.com/kb/pt/documentation/ |
 | php | https://www.php.net/docs.php |
 | python3-pymysql | https://pymysql.readthedocs.io/en/latest/ |
-| golang | https://golang.org/doc/ |
 | mediawiki | https://www.mediawiki.org/wiki/Documentation |
 
 
