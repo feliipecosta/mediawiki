@@ -8,8 +8,6 @@ Deploy AWS instance and configure Mediawiki
 
 1 - Change "credentials" files with AWS user credentials and change the "aws_user_name" parameter at variables.tf file.
 
-com as credênciais do usuário criado no IAM da AWS
-
 2 - Execute "deploy.sh"
 
 ```sh
